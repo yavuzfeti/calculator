@@ -1,0 +1,5 @@
+package com.overthinkers.calculator
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity()

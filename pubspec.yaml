@@ -1,0 +1,38 @@
+name: calculator
+description: "Hesap Makinesi"
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  url_launcher: ^6.3.0
+  flutter_svg: ^2.0.10+1
+  flutter_spinkit: ^5.2.1
+  flutter_secure_storage: ^9.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: lib/Assets/Fonts/Nunito/Bold.ttf
+        - asset: lib/Assets/Fonts/Nunito/Light.ttf
+        - asset: lib/Assets/Fonts/Nunito/Medium.ttf
+        - asset: lib/Assets/Fonts/Nunito/Regular.ttf
+        - asset: lib/Assets/Fonts/Nunito/ExtraBold.ttf
+        - asset: lib/Assets/Fonts/Nunito/ExtraLight.ttf
+        - asset: lib/Assets/Fonts/Nunito/Black.ttf
+
+  assets:
+    - lib/Assets/Images/
