@@ -1,5 +1,7 @@
+import 'package:calculator/Components/Message.dart';
 import 'package:calculator/Components/Themes.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,9 +15,13 @@ class _HomeState extends State<Home> {
   String process = "0";
   double end = 0;
 
+  bool isOperator(String s) => s == "+" || s == "-" || s == "*" || s == "/" || s == ",";
+
+  bool canAppend(String process, String v) => !(v == "," && (process.endsWith(",") || process.contains(","))) && !(isOperator(process[process.length - 1]) && isOperator(v));
+
   void write(String v)
   {
-    if(!(v=="," && process.contains(",")) && !((process.endsWith(",") || process.endsWith(v)) && (v=="+" || v=="-" || v=="*" || v=="/")))
+    if(canAppend(process,v))
     {
       setState(() {
       if(process!="0")
@@ -25,7 +31,9 @@ class _HomeState extends State<Home> {
       else{
         process=v;
       }
-    });}
+    });
+    }
+    calculate(process);
   }
   
   void delete()
@@ -48,6 +56,19 @@ class _HomeState extends State<Home> {
       process = "0";
       end = 0;
     });
+  }
+
+  void calculate(String p) {
+    if(!(p.endsWith("+")||p.endsWith("-")||p.endsWith("*")||p.endsWith("/")))
+    {
+      try {
+        setState(() {
+          end = Parser().parse(p.replaceAll(',', '.')).evaluate(EvaluationType.REAL, ContextModel());
+        });
+      } catch (e) {
+        messageShow("Hata oluştu", color: Themes.fail);
+      }
+    }
   }
 
   @override
@@ -139,7 +160,10 @@ class _HomeState extends State<Home> {
                       btn("*",(){write("*");}),
                       btn("-",(){write("-");}),
                       btn("+",(){write("+");}),
-                      btn("=",null),
+                      btn("=",(){
+                        calculate(process);
+                        process = end.toString();
+                      }),
                     ]
                 ),
               ],

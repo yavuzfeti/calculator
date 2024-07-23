@@ -4,7 +4,7 @@ import 'package:calculator/Components/Themes.dart';
 import 'package:calculator/Screens/Home.dart';
 import 'package:flutter/material.dart';
 
-int splashTime = 1000;
+int splashTime = 750;
 
 class Splash extends StatefulWidget
 {
